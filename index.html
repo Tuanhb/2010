@@ -422,5 +422,33 @@ tớ muốn dành riêng cho cậu.</p>
     // Khởi tạo website.
     renderStep();
   </script>
+  
+<audio id="backgroundMusic" loop>
+  <source src="music/love-song.mp3" type="audio/mpeg">
+  Trình duyệt không hỗ trợ phát nhạc.
+</audio>
+
+<button id="musicToggle" class="music-toggle" type="button">
+  🎵 Bật nhạc
+</button>
+
+<script>
+  const music = document.getElementById("backgroundMusic");
+  const musicToggle = document.getElementById("musicToggle");
+
+  musicToggle.addEventListener("click", async () => {
+    if (music.paused) {
+      try {
+        await music.play();
+        musicToggle.textContent = "🔇 Tắt nhạc";
+      } catch (error) {
+        musicToggle.textContent = "⚠️ Không phát được nhạc";
+      }
+    } else {
+      music.pause();
+      musicToggle.textContent = "🎵 Bật nhạc";
+    }
+  });
+</script>
 </body>
 </html>
