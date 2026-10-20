@@ -68,7 +68,7 @@
       width: 100%;
       max-width: 460px;
       min-height: 490px;
-      padding: 32px 26px;
+      padding: 32px 26px 58px;
 
       display: flex;
       flex-direction: column;
@@ -98,7 +98,6 @@
     }
 
     .step-label {
-      font-family: "Segoe UI", Arial, sans-serif;
       font-size: 11px;
       letter-spacing: 2px;
       line-height: 1.8;
@@ -140,7 +139,7 @@
       }
     }
 
-    /* Ảnh của cô ấy - mặc định ẩn */
+    /* Ảnh cô ấy - mặc định ẩn */
     .girl-photo {
       display: none;
       width: 160px;
@@ -153,14 +152,13 @@
       margin-bottom: 20px;
     }
 
-    /* Chỉ hiện ảnh ở Step 1 */
+    /* Chỉ hiện ảnh ở bước đầu tiên */
     .girl-photo.show {
       display: block;
       animation: appear 0.6s ease;
     }
 
     h1 {
-      font-family: "Segoe UI", Arial, Tahoma, sans-serif;
       font-size: clamp(25px, 6vw, 33px);
       font-weight: 600;
       line-height: 1.45;
@@ -210,10 +208,47 @@
       color: #b77f91;
     }
 
+    /* Nút nhạc nằm bên trong card, góc dưới bên phải */
+    .music-toggle {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      z-index: 5;
+
+      width: 34px;
+      height: 34px;
+      padding: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid rgba(185, 79, 114, 0.15);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      color: #b94f72;
+      font-size: 15px;
+
+      box-shadow: 0 2px 8px rgba(185, 79, 114, 0.12);
+      cursor: pointer;
+      opacity: 0.85;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .music-toggle:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .music-toggle:focus-visible {
+      outline: 2px solid #b94f72;
+      outline-offset: 2px;
+    }
+
     @media (max-width: 420px) {
       .card {
         min-height: 450px;
-        padding: 28px 20px;
+        padding: 28px 20px 58px;
       }
 
       .message {
@@ -227,6 +262,24 @@
       .girl-photo {
         width: 140px;
         height: 170px;
+      }
+
+      .music-toggle {
+        right: 12px;
+        bottom: 12px;
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    @media (max-height: 650px) {
+      body {
+        align-items: flex-start;
+      }
+
+      .card {
+        margin-top: 8px;
+        margin-bottom: 8px;
       }
     }
 
@@ -254,7 +307,7 @@
 
     <div class="illustration" id="illustration">💌</div>
 
-    <!-- Ảnh cô ấy: chỉ xuất hiện ở Step 1 -->
+    <!-- Ảnh cô ấy: chỉ xuất hiện ở bước đầu -->
     <img
       id="girlPhoto"
       class="girl-photo"
@@ -279,7 +332,24 @@ tớ muốn dành riêng cho cậu.</p>
     <div class="footer" id="footer">
       MADE WITH A LITTLE WARMTH
     </div>
+
+    <!-- Nút nhạc bên trong card -->
+    <button
+      id="musicToggle"
+      class="music-toggle"
+      type="button"
+      aria-label="Bật nhạc"
+      title="Bật nhạc"
+    >
+    🎵
+    </button>
   </main>
+
+  <!-- File nhạc -->
+  <audio id="backgroundMusic" loop preload="none">
+    <source src="music/love-song.mp3" type="audio/mpeg">
+    Trình duyệt không hỗ trợ phát nhạc.
+  </audio>
 
   <script>
     "use strict";
@@ -304,7 +374,7 @@ tớ muốn dành riêng cho cậu.</p>
       {
         icon: "🎀",
         title: "Một điều tớ mong...",
-        message: "Mong cậu luôn có đủ dịu dàng\nđể yêu thương chính mình,\nđủ mạnh mẽ để đi qua những ngày không dễ dàng,\nđủ kiên nhãn để trưởng thành hơn mỗi ngày,\nvà đủ bình yên để tận hưởng những điều nhỏ bé.",
+        message: "Mong cậu luôn có đủ dịu dàng\nđể yêu thương chính mình,\nđủ mạnh mẽ để đi qua những ngày không dễ dàng,\nđủ kiên nhẫn để trưởng thành hơn mỗi ngày,\nvà đủ bình yên để tận hưởng những điều nhỏ bé.",
         button: "Còn một điều nữa... 💗",
         label: "MY WISH",
         footer: "YOU DESERVE GOOD THINGS"
@@ -356,11 +426,8 @@ tớ muốn dành riêng cho cậu.</p>
       elements.button.textContent = step.button;
       elements.footer.textContent = step.footer;
 
-      // Chỉ hiển thị ảnh ở Step 1.
-      elements.photo.classList.toggle(
-        "show",
-        currentStep === 0
-      );
+      // Chỉ hiện ảnh ở bước đầu tiên.
+      elements.photo.classList.toggle("show", currentStep === 0);
 
       // Cập nhật thanh tiến trình.
       elements.progress.replaceChildren();
@@ -419,36 +486,34 @@ tớ muốn dành riêng cho cậu.</p>
 
     setInterval(createParticle, 1000);
 
+    // Điều khiển bật/tắt nhạc.
+    const music = document.getElementById("backgroundMusic");
+    const musicToggle = document.getElementById("musicToggle");
+
+    musicToggle.addEventListener("click", async () => {
+      if (music.paused) {
+        try {
+          await music.play();
+
+          musicToggle.textContent = "🔊";
+          musicToggle.setAttribute("aria-label", "Tắt nhạc");
+          musicToggle.title = "Tắt nhạc";
+        } catch (error) {
+          musicToggle.textContent = "🎵";
+          musicToggle.setAttribute("aria-label", "Không thể phát nhạc");
+          musicToggle.title = "Không thể phát nhạc. Hãy kiểm tra file nhạc.";
+        }
+      } else {
+        music.pause();
+
+        musicToggle.textContent = "🎵";
+        musicToggle.setAttribute("aria-label", "Bật nhạc");
+        musicToggle.title = "Bật nhạc";
+      }
+    });
+
     // Khởi tạo website.
     renderStep();
   </script>
-  
-<audio id="backgroundMusic" loop>
-  <source src="music/love-song.mp3" type="audio/mpeg">
-  Trình duyệt không hỗ trợ phát nhạc.
-</audio>
-
-<button id="musicToggle" class="music-toggle" type="button">
-  🎵 Bật nhạc
-</button>
-
-<script>
-  const music = document.getElementById("backgroundMusic");
-  const musicToggle = document.getElementById("musicToggle");
-
-  musicToggle.addEventListener("click", async () => {
-    if (music.paused) {
-      try {
-        await music.play();
-        musicToggle.textContent = "🔇 Tắt nhạc";
-      } catch (error) {
-        musicToggle.textContent = "⚠️ Không phát được nhạc";
-      }
-    } else {
-      music.pause();
-      musicToggle.textContent = "🎵 Bật nhạc";
-    }
-  });
-</script>
 </body>
 </html>
