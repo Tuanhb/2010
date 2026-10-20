@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gửi cậu ngày 20/10 💌</title>
+
+  <style>
+    /* Font hệ thống, không phụ thuộc Google Fonts */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+
+      font-family: "Segoe UI", Arial, Tahoma, sans-serif;
+      color: #754453;
+
+      background:
+        radial-gradient(circle at 20% 20%, #fff4f4, transparent 35%),
+        linear-gradient(135deg, #ffe6ec, #fff6ef, #fbd9e5);
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      bottom: -40px;
+      animation: floatUp linear forwards;
+      opacity: 0.7;
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-115vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 460px;
+      min-height: 490px;
+      padding: 32px 26px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 28px;
+      box-shadow: 0 20px 70px rgba(193, 107, 129, 0.12);
+      backdrop-filter: blur(12px);
+
+      animation: appear 0.6s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step-label {
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      line-height: 1.8;
+      color: #b76b85;
+      margin-bottom: 20px;
+    }
+
+    .progress {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 22px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #efd5dc;
+    }
+
+    .dot.active {
+      background: #bd6782;
+    }
+
+    .illustration {
+      font-size: 68px;
+      line-height: 1.4;
+      margin-bottom: 18px;
+      animation: heartbeat 2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.06);
+      }
+    }
+
+    h1 {
+      font-family: "Segoe UI", Arial, Tahoma, sans-serif;
+      font-size: clamp(25px, 6vw, 33px);
+      font-weight: 600;
+      line-height: 1.45;
+      margin-bottom: 16px;
+      color: #b94f72;
+      overflow-wrap: anywhere;
+    }
+
+    .message {
+      width: 100%;
+      font-size: 16px;
+      line-height: 1.9;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+      margin-bottom: 24px;
+    }
+
+    .next-btn {
+      border: none;
+      padding: 14px 25px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #d77c98, #b94f72);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.5;
+      cursor: pointer;
+      box-shadow: 0 7px 18px rgba(185, 79, 114, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .next-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(185, 79, 114, 0.28);
+    }
+
+    .next-btn:focus-visible {
+      outline: 3px solid #b94f72;
+      outline-offset: 4px;
+    }
+
+    .footer {
+      margin-top: 23px;
+      font-size: 11px;
+      line-height: 1.8;
+      letter-spacing: 1px;
+      color: #b77f91;
+    }
+
+    @media (max-width: 420px) {
+      .card {
+        min-height: 450px;
+        padding: 28px 20px;
+      }
+
+      .message {
+        font-size: 15px;
+      }
+
+      .illustration {
+        font-size: 60px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles" id="particles"></div>
+
+  <main class="card" id="card">
+    <div class="step-label" id="stepLabel">
+      A LITTLE SURPRISE
+    </div>
+
+    <div class="progress" id="progress"></div>
+
+    <div class="illustration" id="illustration">💌</div>
+
+    <h1 id="title">Gửi cậu một món quà nhỏ</h1>
+
+    <p class="message" id="message">Hôm nay có một điều đặc biệt
+tớ muốn dành riêng cho cậu.</p>
+
+    <button
+      class="next-btn"
+      id="nextBtn"
+      type="button"
+      onclick="nextStep()"
+    >
+      Mở món quà nhé ✨
+    </button>
+
+    <div class="footer" id="footer">
+      MADE WITH A LITTLE WARMTH
+    </div>
+  </main>
+
+  <script>
+    "use strict";
+
+    const steps = [
+      {
+        icon: "💌",
+        title: "Gửi cậu một món quà nhỏ",
+        message: "Hôm nay có một điều đặc biệt\ntớ muốn dành riêng cho cậu.",
+        button: "Mở món quà nhé ✨",
+        label: "A LITTLE SURPRISE",
+        footer: "MADE WITH A LITTLE WARMTH"
+      },
+      {
+        icon: "🌷",
+        title: "Hôm nay là ngày của cậu!",
+        message: "20/10 rồi đấy.\nCậu có biết hôm nay mình được quyền\nđáng yêu hơn mọi ngày không?",
+        button: "Thế còn gì nữa? 👀",
+        label: "STEP 02 · A LITTLE REMINDER",
+        footer: "KEEP THAT LOVELY SMILE"
+      },
+      {
+        icon: "🎀",
+        title: "Một điều tớ mong...",
+        message: "Mong cậu luôn có đủ dịu dàng\nđể yêu thương chính mình,\nđủ mạnh mẽ để đi qua những ngày khó,\nvà đủ bình yên để tận hưởng những điều nhỏ bé.",
+        button: "Còn một điều nữa... 💗",
+        label: "STEP 03 · MY WISH",
+        footer: "YOU DESERVE GOOD THINGS"
+      },
+      {
+        icon: "🌸",
+        title: "Chúc mừng ngày 20/10!",
+        message: "Chúc cậu luôn xinh đẹp theo cách\nmà chính cậu yêu thích,\nluôn gặp những người chân thành,\nvà luôn có những ngày đáng để mỉm cười.\n\nMong thế giới dịu dàng với cậu,\nnhư cách cậu xứng đáng được đối xử.",
+        button: "Đọc lời nhắn cuối cùng 💌",
+        label: "STEP 04 · FOR YOU",
+        footer: "A WISH FROM THE HEART"
+      },
+      {
+        icon: "❤️",
+        title: "Và điều cuối cùng...",
+        message: "Giữa rất nhiều điều bình thường\ncủa cuộc sống,\ntớ mong cậu vẫn tìm được những lý do\nđể vui vẻ, để hy vọng và để yêu đời.\n\nChúc cô gái đặc biệt hôm nay\ncó một ngày 20/10 thật nhiều niềm vui.\n\nCậu cứ việc tỏa sáng nhé!",
+        button: "Đọc lại từ đầu ↺",
+        label: "JUST ONE LAST THING",
+        footer: "HAPPY VIETNAMESE WOMEN'S DAY"
+      }
+    ];
+
+    let currentStep = 0;
+
+    const elements = {
+      card: document.getElementById("card"),
+      label: document.getElementById("stepLabel"),
+      progress: document.getElementById("progress"),
+      icon: document.getElementById("illustration"),
+      title: document.getElementById("title"),
+      message: document.getElementById("message"),
+      button: document.getElementById("nextBtn"),
+      footer: document.getElementById("footer"),
+      particles: document.getElementById("particles")
+    };
+
+    function renderStep() {
+      const step = steps[currentStep];
+
+      elements.card.style.animation = "none";
+      void elements.card.offsetWidth;
+      elements.card.style.animation = "appear 0.6s ease";
+
+      elements.label.textContent = step.label;
+      elements.icon.textContent = step.icon;
+      elements.title.textContent = step.title;
+      elements.message.textContent = step.message;
+      elements.button.textContent = step.button;
+      elements.footer.textContent = step.footer;
+
+      // Tạo các chấm tiến trình mà không chèn HTML động.
+      elements.progress.replaceChildren();
+
+      steps.forEach((_, index) => {
+        const dot = document.createElement("span");
+        dot.className = "dot";
+
+        if (index <= currentStep) {
+          dot.classList.add("active");
+        }
+
+        elements.progress.appendChild(dot);
+      });
+
+      if (currentStep === steps.length - 1) {
+        burstHearts();
+      }
+    }
+
+    function nextStep() {
+      currentStep =
+        currentStep === steps.length - 1
+          ? 0
+          : currentStep + 1;
+
+      renderStep();
+    }
+
+    function createParticle() {
+      const particle = document.createElement("span");
+      particle.className = "particle";
+
+      const symbols = ["♡", "♥", "✿", "✨", "🌸"];
+
+      particle.textContent =
+        symbols[Math.floor(Math.random() * symbols.length)];
+
+      particle.style.left = Math.random() * 100 + "vw";
+      particle.style.fontSize =
+        (14 + Math.random() * 18) + "px";
+
+      particle.style.animationDuration =
+        (6 + Math.random() * 7) + "s";
+
+      elements.particles.appendChild(particle);
+
+      setTimeout(() => particle.remove(), 14000);
+    }
+
+    function burstHearts() {
+      for (let i = 0; i < 24; i++) {
+        setTimeout(createParticle, i * 90);
+      }
+    }
+
+    setInterval(createParticle, 1000);
+
+    renderStep();
+  </script>
+</body>
+</html>
